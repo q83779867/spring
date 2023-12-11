@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wenyuan.mapper.UserMapper">
+
+    <resultMap id="BaseResultMap" type="com.wenyuan.pojo.User">
+            <id property="userId" column="user_id" jdbcType="VARCHAR"/>
+            <result property="userName" column="user_name" jdbcType="VARCHAR"/>
+            <result property="password" column="password" jdbcType="VARCHAR"/>
+            <result property="state" column="state" jdbcType="INTEGER"/>
+            <result property="userType" column="user_type" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <select id="userAll" resultType="com.wenyuan.pojo.User">
+        select * from quanxian.s_user;
+    </select>
+    <select id="userById" resultType="com.wenyuan.pojo.User" parameterType="java.lang.Long">
+        select * from quanxian.s_user where user_id=#{userId};
+    </select>
+
+    <insert id="userInsert" parameterType="com.wenyuan.pojo.User">
+        insert into quanxian.s_user(user_id, user_name, password, state, user_type)
+        values (#{userId},#{userName},#{password},#{state},#{userType});
+    </insert>
+    <update id="userUpdate" parameterType="com.wenyuan.pojo.User">
+        update quanxian.s_user
+            set user_name = #{userName},password=#{password},state=#{state}, user_type = #{userType}
+        where user_id = #{userId};
+    </update>
+    <delete id="userDelete" parameterType="java.lang.Long">
+        delete from quanxian.s_user where user_id = #{userId};
+    </delete>
+    <select id="userLimit" resultType="com.wenyuan.pojo.User">
+        select *
+        from quanxian.s_user limit #{startIndex},#{pageSize};
+    </select>
+
+</mapper>

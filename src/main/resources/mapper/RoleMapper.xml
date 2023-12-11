@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wenyuan.mapper.RoleMapper">
+
+    <resultMap id="BaseResultMap" type="com.wenyuan.pojo.Role">
+            <id property="roleId" column="role_id" jdbcType="VARCHAR"/>
+            <result property="roleName" column="role_name" jdbcType="VARCHAR"/>
+            <result property="description" column="description" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <select id="roleAll" resultType="com.wenyuan.pojo.Role">
+        select * from quanxian.s_role;
+    </select>
+    <select id="roleById" resultType="com.wenyuan.pojo.Role" parameterType="java.lang.Long">
+        select * from quanxian.s_role where role_id=#{roleId};
+    </select>
+    <insert id="roleInsert" parameterType="com.wenyuan.pojo.Role">
+        insert into quanxian.s_role(role_id, role_name, description)
+        values (#{roleId}, #{roleName},#{description});
+    </insert>
+    <update id="roleUpdate" parameterType="com.wenyuan.pojo.Role">
+        update quanxian.s_role
+            set role_name = #{roleName}, description = #{description} where role_id = #{roleId};
+    </update>
+    <delete id="roleDelete" parameterType="java.lang.Long">
+        delete from quanxian.s_role where role_id = #{roleId};
+    </delete>
+
+</mapper>

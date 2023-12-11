@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wenyuan.mapper.MenuMapper">
+
+    <resultMap id="BaseResultMap" type="com.wenyuan.pojo.Menu">
+            <id property="menuId" column="menu_id" jdbcType="VARCHAR"/>
+            <result property="menuName" column="menu_name" jdbcType="VARCHAR"/>
+            <result property="sort" column="sort" jdbcType="INTEGER"/>
+            <result property="isEnabled" column="is_enabled" jdbcType="INTEGER"/>
+            <result property="description" column="description" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <select id="menuAll" resultType="com.wenyuan.pojo.Menu">
+        select * from quanxian.s_menu;
+    </select>
+    <select id="menuById" resultType="com.wenyuan.pojo.Menu" parameterType="java.lang.Long">
+        select * from quanxian.s_menu where menu_id = #{menuId};
+    </select>
+    <insert id="menuInsert" parameterType="com.wenyuan.pojo.Menu">
+        insert into quanxian.s_menu(menu_id, menu_name, sort, is_enabled, description)
+        values (#{menuId}, #{menuName}, #{sort}, #{isEnabled},#{description});
+    </insert>
+    <update id="menuUpdate" parameterType="com.wenyuan.pojo.Menu">
+        update quanxian.s_menu
+            set menu_name = #{menuName},sort = #{sort},is_enabled = #{isEnabled},description = #{description}
+        where menu_id = #{menuId};
+    </update>
+    <delete id="menuDelete" parameterType="java.lang.Long">
+        delete from quanxian.s_menu where menu_id = #{menuId};
+    </delete>
+
+</mapper>
+

@@ -1,0 +1,13 @@
+# 整合数据源
+spring:
+  datasource:
+    username: root
+    password: 83779867
+    url: jdbc:mysql://localhost:3306/quanxian?userUnicode=true&chacacterEncoding=utf-8&serverTimezone=UTC
+    # Springboot使用 com.mysql.cj.jdbc.Driver 针对Mysql8以上，5可能会有bug
+    driver-class-name: com.mysql.cj.jdbc.Driver
+# 整合mybatis
+mybatis:
+  type-aliases-package: com.ssl.bean
+  # 解决绑定异常：mapper.xml最好和接口的包名路径一致
+  mapper-locations: classpath:com.ssl.mapper/*.xml
